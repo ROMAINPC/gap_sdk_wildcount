@@ -139,43 +139,6 @@ void LoadCNN_SQ8_Library()
 			TCArg("signed char * __restrict__", "Infos")
 		)
 	);
-
-	LibKernelTemplate("Ker_MM_Pool_SQ16_T",
-		CArgs(14,
-			TCArg("signed short * __restrict__", "In"),
-			TCArg("unsigned short int", "W"),
-			TCArg("unsigned short int", "H"),
-			TCArg("unsigned char", "Fx"),
-			TCArg("unsigned char", "Fy"),
-			TCArg("unsigned char", "Sx"),
-			TCArg("unsigned char", "Sy"),
-			TCArg("unsigned char", "FirstTile"),
-			TCArg("v4s", "Pad"),
-			TCArg("signed short * __restrict__", "Out"),
-			TCArg("unsigned short int", "Feat"),
-			TCArg("unsigned short int", "Wo"),
-			TCArg("unsigned short int", "Ho"),
-			TCArg("signed char * __restrict__", "Infos")
-		)
-	);
-	LibKernelTemplate("Ker_MM_Pool_USQ16_T",
-		CArgs(14,
-			TCArg("unsigned short * __restrict__", "In"),
-			TCArg("unsigned short int", "W"),
-			TCArg("unsigned short int", "H"),
-			TCArg("unsigned char", "Fx"),
-			TCArg("unsigned char", "Fy"),
-			TCArg("unsigned char", "Sx"),
-			TCArg("unsigned char", "Sy"),
-			TCArg("unsigned char", "FirstTile"),
-			TCArg("v4s", "Pad"),
-			TCArg("unsigned short * __restrict__", "Out"),
-			TCArg("unsigned short int", "Feat"),
-			TCArg("unsigned short int", "Wo"),
-			TCArg("unsigned short int", "Ho"),
-			TCArg("signed char * __restrict__", "Infos")
-		)
-	);
 	LibKernelTemplate("KerConvLinReduct_SQ8_T",
                   CArgs(8,
 			TCArg("int *__restrict__", "In"),
@@ -607,18 +570,7 @@ void LoadCNN_SQ8_Library()
         LibKernel("KerParMaxPoolNxMStrideSxSy_HWC_HSigmoid_SQ8", 	CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_SQ8_T", CNN_Match(CNN_OperList(1, KOP_MAXPOOL), CNN_OperList(1, KOP_HSIGMOID),  1, CNN_Type(1,0,0,0,1), -1,-1,1,1,-1,-1));
         LibKernel("KerParMaxPoolNxMStrideSxSy_HWC_Sigmoid_SQ8", 	CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_SQ8_T", CNN_Match(CNN_OperList(1, KOP_MAXPOOL), CNN_OperList(1, KOP_SIGMOID),   1, CNN_Type(1,0,0,0,1), -1,-1,1,1,-1,-1));
         LibKernel("KerParMaxPoolNxMStrideSxSy_HWC_Tanh_SQ8", 		CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_SQ8_T", CNN_Match(CNN_OperList(1, KOP_MAXPOOL), CNN_OperList(1, KOP_TANH),	    1, CNN_Type(1,0,0,0,1), -1,-1,1,1,-1,-1));
-
-        LibKernel("KerParMaxPoolNxMStrideSxSy_HWC_USQ8", 		CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_USQ8_T", CNN_Match(CNN_OperList(1, KOP_MAXPOOL), CNN_OperList(1, KOP_NONE),      1, CNN_Type(-1,0,0,0,-1), -1,-1,1,1,-1,-1));
-        LibKernel("KerParMaxPoolNxMStrideSxSy_HWC_ReLU_USQ8", 		CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_USQ8_T", CNN_Match(CNN_OperList(1, KOP_MAXPOOL), CNN_OperList(1, KOP_RELU),	     1, CNN_Type(-1,0,0,0,-1), -1,-1,1,1,-1,-1));
-        LibKernel("KerParMaxPoolNxMStrideSxSy_HWC_ReLUN_USQ8", 		CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_USQ8_T", CNN_Match(CNN_OperList(1, KOP_MAXPOOL), CNN_OperList(1, KOP_RELUN),     1, CNN_Type(-1,0,0,0,-1), -1,-1,1,1,-1,-1));
-        LibKernel("KerParMaxPoolNxMStrideSxSy_HWC_ReLUM_USQ8", 		CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_USQ8_T", CNN_Match(CNN_OperList(1, KOP_MAXPOOL), CNN_OperList(1, KOP_RELUM),     1, CNN_Type(-1,0,0,0,-1), -1,-1,1,1,-1,-1));
-        LibKernel("KerParMaxPoolNxMStrideSxSy_HWC_ReLUMN_USQ8", 	CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_USQ8_T", CNN_Match(CNN_OperList(1, KOP_MAXPOOL), CNN_OperList(1, KOP_RELUMN),    1, CNN_Type(-1,0,0,0,-1), -1,-1,1,1,-1,-1));
-        LibKernel("KerParMaxPoolNxMStrideSxSy_HWC_LeakyReLU_USQ8", 	CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_USQ8_T", CNN_Match(CNN_OperList(1, KOP_MAXPOOL), CNN_OperList(1, KOP_LEAKYRELU), 1, CNN_Type(-1,0,0,0,-1), -1,-1,1,1,-1,-1));
-        LibKernel("KerParMaxPoolNxMStrideSxSy_HWC_HSwish_USQ8", 	CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_USQ8_T", CNN_Match(CNN_OperList(1, KOP_MAXPOOL), CNN_OperList(1, KOP_HSWISH),    1, CNN_Type(-1,0,0,0,-1), -1,-1,1,1,-1,-1));
-        LibKernel("KerParMaxPoolNxMStrideSxSy_HWC_HSigmoid_USQ8", 	CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_USQ8_T", CNN_Match(CNN_OperList(1, KOP_MAXPOOL), CNN_OperList(1, KOP_HSIGMOID),  1, CNN_Type(-1,0,0,0,-1), -1,-1,1,1,-1,-1));
-        LibKernel("KerParMaxPoolNxMStrideSxSy_HWC_Sigmoid_USQ8", 	CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_USQ8_T", CNN_Match(CNN_OperList(1, KOP_MAXPOOL), CNN_OperList(1, KOP_SIGMOID),   1, CNN_Type(-1,0,0,0,-1), -1,-1,1,1,-1,-1));
-        LibKernel("KerParMaxPoolNxMStrideSxSy_HWC_Tanh_USQ8", 		CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_USQ8_T", CNN_Match(CNN_OperList(1, KOP_MAXPOOL), CNN_OperList(1, KOP_TANH),	     1, CNN_Type(-1,0,0,0,-1), -1,-1,1,1,-1,-1));
-
+        
         LibKernel("KerParAvgPoolNxMStrideSxSy_HWC_SQ8", 		CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_SQ8_T", CNN_Match(CNN_OperList(1, KOP_AVGPOOL), CNN_OperList(1, KOP_NONE), 	    1, CNN_Type(1,0,0,0,1), -1,-1,1,1,-1,-1));
         LibKernel("KerParAvgPoolNxMStrideSxSy_HWC_ReLU_SQ8", 		CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_SQ8_T", CNN_Match(CNN_OperList(1, KOP_AVGPOOL), CNN_OperList(1, KOP_RELU),	    1, CNN_Type(1,0,0,0,1), -1,-1,1,1,-1,-1));
         LibKernel("KerParAvgPoolNxMStrideSxSy_HWC_ReLUN_SQ8", 		CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_SQ8_T", CNN_Match(CNN_OperList(1, KOP_AVGPOOL), CNN_OperList(1, KOP_RELUN),	    1, CNN_Type(1,0,0,0,1), -1,-1,1,1,-1,-1));
@@ -630,6 +582,17 @@ void LoadCNN_SQ8_Library()
         LibKernel("KerParAvgPoolNxMStrideSxSy_HWC_Sigmoid_SQ8", 	CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_SQ8_T", CNN_Match(CNN_OperList(1, KOP_AVGPOOL), CNN_OperList(1, KOP_SIGMOID),   1, CNN_Type(1,0,0,0,1), -1,-1,1,1,-1,-1));
         LibKernel("KerParAvgPoolNxMStrideSxSy_HWC_Tanh_SQ8", 		CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_SQ8_T", CNN_Match(CNN_OperList(1, KOP_AVGPOOL), CNN_OperList(1, KOP_TANH),	    1, CNN_Type(1,0,0,0,1), -1,-1,1,1,-1,-1));
 
+        LibKernel("KerParMaxPoolNxMStrideSxSy_HWC_USQ8", 		CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_USQ8_T", CNN_Match(CNN_OperList(1, KOP_MAXPOOL), CNN_OperList(1, KOP_NONE),      1, CNN_Type(-1,0,0,0,-1), -1,-1,1,1,-1,-1));
+        LibKernel("KerParMaxPoolNxMStrideSxSy_HWC_ReLU_USQ8", 		CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_USQ8_T", CNN_Match(CNN_OperList(1, KOP_MAXPOOL), CNN_OperList(1, KOP_RELU),	     1, CNN_Type(-1,0,0,0,-1), -1,-1,1,1,-1,-1));
+        LibKernel("KerParMaxPoolNxMStrideSxSy_HWC_ReLUN_USQ8", 		CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_USQ8_T", CNN_Match(CNN_OperList(1, KOP_MAXPOOL), CNN_OperList(1, KOP_RELUN),     1, CNN_Type(-1,0,0,0,-1), -1,-1,1,1,-1,-1));
+        LibKernel("KerParMaxPoolNxMStrideSxSy_HWC_ReLUM_USQ8", 		CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_USQ8_T", CNN_Match(CNN_OperList(1, KOP_MAXPOOL), CNN_OperList(1, KOP_RELUM),     1, CNN_Type(-1,0,0,0,-1), -1,-1,1,1,-1,-1));
+        LibKernel("KerParMaxPoolNxMStrideSxSy_HWC_ReLUMN_USQ8", 	CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_USQ8_T", CNN_Match(CNN_OperList(1, KOP_MAXPOOL), CNN_OperList(1, KOP_RELUMN),    1, CNN_Type(-1,0,0,0,-1), -1,-1,1,1,-1,-1));
+        LibKernel("KerParMaxPoolNxMStrideSxSy_HWC_LeakyReLU_USQ8", 	CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_USQ8_T", CNN_Match(CNN_OperList(1, KOP_MAXPOOL), CNN_OperList(1, KOP_LEAKYRELU), 1, CNN_Type(-1,0,0,0,-1), -1,-1,1,1,-1,-1));
+        LibKernel("KerParMaxPoolNxMStrideSxSy_HWC_HSwish_USQ8", 	CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_USQ8_T", CNN_Match(CNN_OperList(1, KOP_MAXPOOL), CNN_OperList(1, KOP_HSWISH),    1, CNN_Type(-1,0,0,0,-1), -1,-1,1,1,-1,-1));
+        LibKernel("KerParMaxPoolNxMStrideSxSy_HWC_HSigmoid_USQ8", 	CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_USQ8_T", CNN_Match(CNN_OperList(1, KOP_MAXPOOL), CNN_OperList(1, KOP_HSIGMOID),  1, CNN_Type(-1,0,0,0,-1), -1,-1,1,1,-1,-1));
+        LibKernel("KerParMaxPoolNxMStrideSxSy_HWC_Sigmoid_USQ8", 	CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_USQ8_T", CNN_Match(CNN_OperList(1, KOP_MAXPOOL), CNN_OperList(1, KOP_SIGMOID),   1, CNN_Type(-1,0,0,0,-1), -1,-1,1,1,-1,-1));
+        LibKernel("KerParMaxPoolNxMStrideSxSy_HWC_Tanh_USQ8", 		CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_USQ8_T", CNN_Match(CNN_OperList(1, KOP_MAXPOOL), CNN_OperList(1, KOP_TANH),	     1, CNN_Type(-1,0,0,0,-1), -1,-1,1,1,-1,-1));
+        
         LibKernel("KerParAvgPoolNxMStrideSxSy_HWC_USQ8", 		CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_USQ8_T", CNN_Match(CNN_OperList(1, KOP_AVGPOOL), CNN_OperList(1, KOP_NONE),      1, CNN_Type(-1,0,0,0,-1), -1,-1,1,1,-1,-1));
         LibKernel("KerParAvgPoolNxMStrideSxSy_HWC_ReLU_USQ8", 		CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_USQ8_T", CNN_Match(CNN_OperList(1, KOP_AVGPOOL), CNN_OperList(1, KOP_RELU),	     1, CNN_Type(-1,0,0,0,-1), -1,-1,1,1,-1,-1));
         LibKernel("KerParAvgPoolNxMStrideSxSy_HWC_ReLUN_USQ8", 		CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_USQ8_T", CNN_Match(CNN_OperList(1, KOP_AVGPOOL), CNN_OperList(1, KOP_RELUN),     1, CNN_Type(-1,0,0,0,-1), -1,-1,1,1,-1,-1));
@@ -640,50 +603,6 @@ void LoadCNN_SQ8_Library()
         LibKernel("KerParAvgPoolNxMStrideSxSy_HWC_HSigmoid_USQ8", 	CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_USQ8_T", CNN_Match(CNN_OperList(1, KOP_AVGPOOL), CNN_OperList(1, KOP_HSIGMOID),  1, CNN_Type(-1,0,0,0,-1), -1,-1,1,1,-1,-1));
         LibKernel("KerParAvgPoolNxMStrideSxSy_HWC_Sigmoid_USQ8", 	CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_USQ8_T", CNN_Match(CNN_OperList(1, KOP_AVGPOOL), CNN_OperList(1, KOP_SIGMOID),   1, CNN_Type(-1,0,0,0,-1), -1,-1,1,1,-1,-1));
         LibKernel("KerParAvgPoolNxMStrideSxSy_HWC_Tanh_USQ8", 		CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_USQ8_T", CNN_Match(CNN_OperList(1, KOP_AVGPOOL), CNN_OperList(1, KOP_TANH),	     1, CNN_Type(-1,0,0,0,-1), -1,-1,1,1,-1,-1));
-
-        LibKernel("KerParMaxPoolNxMStrideSxSy_HWC_SQ16", 		CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_SQ16_T", CNN_Match(CNN_OperList(1, KOP_MAXPOOL), CNN_OperList(1, KOP_NONE),      1, CNN_Type(2,0,0,0,2), -1,-1,1,1,-1,-1));
-        LibKernel("KerParMaxPoolNxMStrideSxSy_HWC_ReLU_SQ16", 		CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_SQ16_T", CNN_Match(CNN_OperList(1, KOP_MAXPOOL), CNN_OperList(1, KOP_RELU),	     1, CNN_Type(2,0,0,0,2), -1,-1,1,1,-1,-1));
-        LibKernel("KerParMaxPoolNxMStrideSxSy_HWC_ReLUN_SQ16", 		CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_SQ16_T", CNN_Match(CNN_OperList(1, KOP_MAXPOOL), CNN_OperList(1, KOP_RELUN),     1, CNN_Type(2,0,0,0,2), -1,-1,1,1,-1,-1));
-        LibKernel("KerParMaxPoolNxMStrideSxSy_HWC_ReLUM_SQ16", 		CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_SQ16_T", CNN_Match(CNN_OperList(1, KOP_MAXPOOL), CNN_OperList(1, KOP_RELUM),     1, CNN_Type(2,0,0,0,2), -1,-1,1,1,-1,-1));
-        LibKernel("KerParMaxPoolNxMStrideSxSy_HWC_ReLUMN_SQ16", 	CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_SQ16_T", CNN_Match(CNN_OperList(1, KOP_MAXPOOL), CNN_OperList(1, KOP_RELUMN),    1, CNN_Type(2,0,0,0,2), -1,-1,1,1,-1,-1));
-        LibKernel("KerParMaxPoolNxMStrideSxSy_HWC_LeakyReLU_SQ16", 	CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_SQ16_T", CNN_Match(CNN_OperList(1, KOP_MAXPOOL), CNN_OperList(1, KOP_LEAKYRELU), 1, CNN_Type(2,0,0,0,2), -1,-1,1,1,-1,-1));
-        LibKernel("KerParMaxPoolNxMStrideSxSy_HWC_HSwish_SQ16", 	CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_SQ16_T", CNN_Match(CNN_OperList(1, KOP_MAXPOOL), CNN_OperList(1, KOP_HSWISH),    1, CNN_Type(2,0,0,0,2), -1,-1,1,1,-1,-1));
-        LibKernel("KerParMaxPoolNxMStrideSxSy_HWC_HSigmoid_SQ16", 	CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_SQ16_T", CNN_Match(CNN_OperList(1, KOP_MAXPOOL), CNN_OperList(1, KOP_HSIGMOID),  1, CNN_Type(2,0,0,0,2), -1,-1,1,1,-1,-1));
-        LibKernel("KerParMaxPoolNxMStrideSxSy_HWC_Sigmoid_SQ16", 	CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_SQ16_T", CNN_Match(CNN_OperList(1, KOP_MAXPOOL), CNN_OperList(1, KOP_SIGMOID),   1, CNN_Type(2,0,0,0,2), -1,-1,1,1,-1,-1));
-        LibKernel("KerParMaxPoolNxMStrideSxSy_HWC_Tanh_SQ16", 		CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_SQ16_T", CNN_Match(CNN_OperList(1, KOP_MAXPOOL), CNN_OperList(1, KOP_TANH),	     1, CNN_Type(2,0,0,0,2), -1,-1,1,1,-1,-1));
-
-        LibKernel("KerParMaxPoolNxMStrideSxSy_HWC_USQ16", 		CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_USQ16_T", CNN_Match(CNN_OperList(1, KOP_MAXPOOL), CNN_OperList(1, KOP_NONE),      1, CNN_Type(-2,0,0,0,-2), -1,-1,1,1,-1,-1));
-        LibKernel("KerParMaxPoolNxMStrideSxSy_HWC_ReLU_USQ16", 		CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_USQ16_T", CNN_Match(CNN_OperList(1, KOP_MAXPOOL), CNN_OperList(1, KOP_RELU),      1, CNN_Type(-2,0,0,0,-2), -1,-1,1,1,-1,-1));
-        LibKernel("KerParMaxPoolNxMStrideSxSy_HWC_ReLUN_USQ16", 	CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_USQ16_T", CNN_Match(CNN_OperList(1, KOP_MAXPOOL), CNN_OperList(1, KOP_RELUN),     1, CNN_Type(-2,0,0,0,-2), -1,-1,1,1,-1,-1));
-        LibKernel("KerParMaxPoolNxMStrideSxSy_HWC_ReLUM_USQ16", 	CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_USQ16_T", CNN_Match(CNN_OperList(1, KOP_MAXPOOL), CNN_OperList(1, KOP_RELUM),     1, CNN_Type(-2,0,0,0,-2), -1,-1,1,1,-1,-1));
-        LibKernel("KerParMaxPoolNxMStrideSxSy_HWC_ReLUMN_USQ16", 	CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_USQ16_T", CNN_Match(CNN_OperList(1, KOP_MAXPOOL), CNN_OperList(1, KOP_RELUMN),    1, CNN_Type(-2,0,0,0,-2), -1,-1,1,1,-1,-1));
-        LibKernel("KerParMaxPoolNxMStrideSxSy_HWC_LeakyReLU_USQ16", 	CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_USQ16_T", CNN_Match(CNN_OperList(1, KOP_MAXPOOL), CNN_OperList(1, KOP_LEAKYRELU), 1, CNN_Type(-2,0,0,0,-2), -1,-1,1,1,-1,-1));
-        LibKernel("KerParMaxPoolNxMStrideSxSy_HWC_HSwish_USQ16", 	CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_USQ16_T", CNN_Match(CNN_OperList(1, KOP_MAXPOOL), CNN_OperList(1, KOP_HSWISH),    1, CNN_Type(-2,0,0,0,-2), -1,-1,1,1,-1,-1));
-        LibKernel("KerParMaxPoolNxMStrideSxSy_HWC_HSigmoid_USQ16", 	CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_USQ16_T", CNN_Match(CNN_OperList(1, KOP_MAXPOOL), CNN_OperList(1, KOP_HSIGMOID),  1, CNN_Type(-2,0,0,0,-2), -1,-1,1,1,-1,-1));
-        LibKernel("KerParMaxPoolNxMStrideSxSy_HWC_Sigmoid_USQ16", 	CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_USQ16_T", CNN_Match(CNN_OperList(1, KOP_MAXPOOL), CNN_OperList(1, KOP_SIGMOID),   1, CNN_Type(-2,0,0,0,-2), -1,-1,1,1,-1,-1));
-        LibKernel("KerParMaxPoolNxMStrideSxSy_HWC_Tanh_USQ16", 		CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_USQ16_T", CNN_Match(CNN_OperList(1, KOP_MAXPOOL), CNN_OperList(1, KOP_TANH),      1, CNN_Type(-2,0,0,0,-2), -1,-1,1,1,-1,-1));
-
-        LibKernel("KerParAvgPoolNxMStrideSxSy_HWC_SQ16", 		CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_SQ16_T", CNN_Match(CNN_OperList(1, KOP_AVGPOOL), CNN_OperList(1, KOP_NONE),      1, CNN_Type(2,0,0,0,2), -1,-1,1,1,-1,-1));
-        LibKernel("KerParAvgPoolNxMStrideSxSy_HWC_ReLU_SQ16", 		CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_SQ16_T", CNN_Match(CNN_OperList(1, KOP_AVGPOOL), CNN_OperList(1, KOP_RELU),	     1, CNN_Type(2,0,0,0,2), -1,-1,1,1,-1,-1));
-        LibKernel("KerParAvgPoolNxMStrideSxSy_HWC_ReLUN_SQ16", 		CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_SQ16_T", CNN_Match(CNN_OperList(1, KOP_AVGPOOL), CNN_OperList(1, KOP_RELUN),     1, CNN_Type(2,0,0,0,2), -1,-1,1,1,-1,-1));
-        LibKernel("KerParAvgPoolNxMStrideSxSy_HWC_ReLUM_SQ16", 		CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_SQ16_T", CNN_Match(CNN_OperList(1, KOP_AVGPOOL), CNN_OperList(1, KOP_RELUM),     1, CNN_Type(2,0,0,0,2), -1,-1,1,1,-1,-1));
-        LibKernel("KerParAvgPoolNxMStrideSxSy_HWC_ReLUMN_SQ16", 	CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_SQ16_T", CNN_Match(CNN_OperList(1, KOP_AVGPOOL), CNN_OperList(1, KOP_RELUMN),    1, CNN_Type(2,0,0,0,2), -1,-1,1,1,-1,-1));
-        LibKernel("KerParAvgPoolNxMStrideSxSy_HWC_LeakyReLU_SQ16", 	CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_SQ16_T", CNN_Match(CNN_OperList(1, KOP_AVGPOOL), CNN_OperList(1, KOP_LEAKYRELU), 1, CNN_Type(2,0,0,0,2), -1,-1,1,1,-1,-1));
-        LibKernel("KerParAvgPoolNxMStrideSxSy_HWC_HSwish_SQ16", 	CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_SQ16_T", CNN_Match(CNN_OperList(1, KOP_AVGPOOL), CNN_OperList(1, KOP_HSWISH),    1, CNN_Type(2,0,0,0,2), -1,-1,1,1,-1,-1));
-        LibKernel("KerParAvgPoolNxMStrideSxSy_HWC_HSigmoid_SQ16", 	CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_SQ16_T", CNN_Match(CNN_OperList(1, KOP_AVGPOOL), CNN_OperList(1, KOP_HSIGMOID),  1, CNN_Type(2,0,0,0,2), -1,-1,1,1,-1,-1));
-        LibKernel("KerParAvgPoolNxMStrideSxSy_HWC_Sigmoid_SQ16", 	CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_SQ16_T", CNN_Match(CNN_OperList(1, KOP_AVGPOOL), CNN_OperList(1, KOP_SIGMOID),   1, CNN_Type(2,0,0,0,2), -1,-1,1,1,-1,-1));
-        LibKernel("KerParAvgPoolNxMStrideSxSy_HWC_Tanh_SQ16", 		CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_SQ16_T", CNN_Match(CNN_OperList(1, KOP_AVGPOOL), CNN_OperList(1, KOP_TANH),	     1, CNN_Type(2,0,0,0,2), -1,-1,1,1,-1,-1));
-
-        LibKernel("KerParAvgPoolNxMStrideSxSy_HWC_USQ16", 		CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_USQ16_T", CNN_Match(CNN_OperList(1, KOP_AVGPOOL), CNN_OperList(1, KOP_NONE),      1, CNN_Type(-2,0,0,0,-2), -1,-1,1,1,-1,-1));
-        LibKernel("KerParAvgPoolNxMStrideSxSy_HWC_ReLU_USQ16", 		CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_USQ16_T", CNN_Match(CNN_OperList(1, KOP_AVGPOOL), CNN_OperList(1, KOP_RELU),      1, CNN_Type(-2,0,0,0,-2), -1,-1,1,1,-1,-1));
-        LibKernel("KerParAvgPoolNxMStrideSxSy_HWC_ReLUN_USQ16", 	CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_USQ16_T", CNN_Match(CNN_OperList(1, KOP_AVGPOOL), CNN_OperList(1, KOP_RELUN),     1, CNN_Type(-2,0,0,0,-2), -1,-1,1,1,-1,-1));
-        LibKernel("KerParAvgPoolNxMStrideSxSy_HWC_ReLUM_USQ16", 	CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_USQ16_T", CNN_Match(CNN_OperList(1, KOP_AVGPOOL), CNN_OperList(1, KOP_RELUM),     1, CNN_Type(-2,0,0,0,-2), -1,-1,1,1,-1,-1));
-        LibKernel("KerParAvgPoolNxMStrideSxSy_HWC_ReLUMN_USQ16", 	CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_USQ16_T", CNN_Match(CNN_OperList(1, KOP_AVGPOOL), CNN_OperList(1, KOP_RELUMN),    1, CNN_Type(-2,0,0,0,-2), -1,-1,1,1,-1,-1));
-        LibKernel("KerParAvgPoolNxMStrideSxSy_HWC_LeakyReLU_USQ16", 	CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_USQ16_T", CNN_Match(CNN_OperList(1, KOP_AVGPOOL), CNN_OperList(1, KOP_LEAKYRELU), 1, CNN_Type(-2,0,0,0,-2), -1,-1,1,1,-1,-1));
-        LibKernel("KerParAvgPoolNxMStrideSxSy_HWC_HSwish_USQ16", 	CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_USQ16_T", CNN_Match(CNN_OperList(1, KOP_AVGPOOL), CNN_OperList(1, KOP_HSWISH),    1, CNN_Type(-2,0,0,0,-2), -1,-1,1,1,-1,-1));
-        LibKernel("KerParAvgPoolNxMStrideSxSy_HWC_HSigmoid_USQ16", 	CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_USQ16_T", CNN_Match(CNN_OperList(1, KOP_AVGPOOL), CNN_OperList(1, KOP_HSIGMOID),  1, CNN_Type(-2,0,0,0,-2), -1,-1,1,1,-1,-1));
-        LibKernel("KerParAvgPoolNxMStrideSxSy_HWC_Sigmoid_USQ16", 	CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_USQ16_T", CNN_Match(CNN_OperList(1, KOP_AVGPOOL), CNN_OperList(1, KOP_SIGMOID),   1, CNN_Type(-2,0,0,0,-2), -1,-1,1,1,-1,-1));
-        LibKernel("KerParAvgPoolNxMStrideSxSy_HWC_Tanh_USQ16", 		CALL_PARALLEL|CALL_HWC_KER, 0, "Ker_MM_Pool_USQ16_T", CNN_Match(CNN_OperList(1, KOP_AVGPOOL), CNN_OperList(1, KOP_TANH),      1, CNN_Type(-2,0,0,0,-2), -1,-1,1,1,-1,-1));
 
 	/* Global Pooling (Max or Avg) with tensor centric scaling and optional ReLU or ReLUN activation */
         LibKernel("KerParGlobalMaxPoolFullFeat_SQ8", CALL_PARALLEL, 0, "KerGlobalPool_SQ8_T", 	CNN_Match(CNN_OperList(1, KOP_GLOBAL_MAXPOOL), CNN_OperList(1, KOP_NONE), 1,
@@ -1617,20 +1536,20 @@ static Kernel_T *CNN_MM_ConvolutionPoolAct_SQ8_Internal(
 	}
 
 	if (Log) {
-		GenTilingDebug("InFeat: %d, OutFeat: %d%s%s\n", InFeat, OutFeat, HWC?", HWC":", CHW", ParFeatConv?", Out Chan Parallel":", H Parallel");
-        	GenTilingDebug("Conv => W:  %d, Pad:[%d,%d] PadT:[%d,%d] => Wc: %d, Filter:[%d,%d]\n", Width,  PadInc[0], PadInc[1], PadIncT[0], PadIncT[1], Wc, Fcx, Fcy);
-        	GenTilingDebug("     => H:  %d, Pad:[%d,%d] PadT:[%d,%d] => Hc: %d\n", Height, PadInc[2], PadInc[3], PadIncT[2], PadIncT[3], Hc);
-        	GenTilingDebug("Pool => Wc: %d, Pad:[%d,%d] => Wo: %d, Filter:[%d,%d]\n", Wc, PadInp[0], PadInp[1], Wo, Fpx, Fpy);
-        	GenTilingDebug("     => Hc: %d, Pad:[%d,%d] => Ho: %d\n", Hc, PadInp[2], PadInp[3], Ho);
-        	GenTilingDebug("OverlapC: %d\n", OverlapC);
-        	GenTilingDebug("OverlapP: %d\n", OverlapP);
-        	GenTilingDebug("TileCons: %d\n", TileCons);
-		GenTilingDebug("UsedIn  : [%d x %d]\n", UsedWidth, UsedHeight);
-		GenTilingDebug("UsedC   : [%d x %d]\n", UsedWc, UsedHc);
-		if (ConvKerName) GenTilingDebug("%20s: %s\n", "ConvKerName", ConvKerName);
-		if (PoolKerName) GenTilingDebug("%20s: %s\n", "PoolKerName", PoolKerName);
-		if (ActKerName) GenTilingDebug("%20s: %s\n", "ActKerName", ActKerName);
-		GenTilingDebug("Nb Oper : %lld\n", LayerOp);
+		printf("InFeat: %d, OutFeat: %d%s%s\n", InFeat, OutFeat, HWC?", HWC":", CHW", ParFeatConv?", Out Chan Parallel":", H Parallel");
+        	printf("Conv => W:  %d, Pad:[%d,%d] PadT:[%d,%d] => Wc: %d, Filter:[%d,%d]\n", Width,  PadInc[0], PadInc[1], PadIncT[0], PadIncT[1], Wc, Fcx, Fcy);
+        	printf("     => H:  %d, Pad:[%d,%d] PadT:[%d,%d] => Hc: %d\n", Height, PadInc[2], PadInc[3], PadIncT[2], PadIncT[3], Hc);
+        	printf("Pool => Wc: %d, Pad:[%d,%d] => Wo: %d, Filter:[%d,%d]\n", Wc, PadInp[0], PadInp[1], Wo, Fpx, Fpy);
+        	printf("     => Hc: %d, Pad:[%d,%d] => Ho: %d\n", Hc, PadInp[2], PadInp[3], Ho);
+        	printf("OverlapC: %d\n", OverlapC);
+        	printf("OverlapP: %d\n", OverlapP);
+        	printf("TileCons: %d\n", TileCons);
+		printf("UsedIn  : [%d x %d]\n", UsedWidth, UsedHeight);
+		printf("UsedC   : [%d x %d]\n", UsedWc, UsedHc);
+		if (ConvKerName) printf("%20s: %s\n", "ConvKerName", ConvKerName);
+		if (PoolKerName) printf("%20s: %s\n", "PoolKerName", PoolKerName);
+		if (ActKerName) printf("%20s: %s\n", "ActKerName", ActKerName);
+		printf("Nb Oper : %lld\n", LayerOp);
 		
 	}
 	int OutTileCons = 8;
@@ -1931,22 +1850,22 @@ static Kernel_T *CNN_HWC_DWConvolutionPoolAct_SQ8_Internal(
 	}
 
 	if (Log) {
-		GenTilingDebug("InFeat: %d, OutFeat: %d%s - TileOrientation: %s\n", InFeat, OutFeat, HWC?", HWC":", CHW", TileOrientation==TILE_HOR?"TILE_HOR":"TILE_VER");
-        	GenTilingDebug("Conv => W:  %d, Pad:[%d,%d] PadT:[%d,%d] => Wc: %d, Filter:[%d,%d]\n", Width,  PadInc[0], PadInc[1], PadIncT[0], PadIncT[1], Wc, Fcx, Fcy);
-        	GenTilingDebug("     => H:  %d, Pad:[%d,%d] PadT:[%d,%d] => Hc: %d\n", Height, PadInc[2], PadInc[3], PadIncT[2], PadIncT[3], Hc);
-        	GenTilingDebug("Pool => Wc: %d, Pad:[%d,%d] => Wo: %d, Filter:[%d,%d]\n", Wc, PadInp[0], PadInp[1], Wo, Fpx, Fpy);
-        	GenTilingDebug("     => Hc: %d, Pad:[%d,%d] => Ho: %d\n", Hc, PadInp[2], PadInp[3], Ho);
-        	GenTilingDebug("OverlapC: %d\n", OverlapC);
-        	GenTilingDebug("OverlapP: %d\n", OverlapP);
-        	GenTilingDebug("TileCons: %d\n", TileCons);
-		GenTilingDebug("UsedIn  : [%d x %d]\n", UsedWidth, UsedHeight);
-		GenTilingDebug("UsedC   : [%d x %d]\n", UsedWc, UsedHc);
-		if (MatPermKerName) GenTilingDebug("%20s: %s\n", "MatPermKerName", MatPermKerName);
-		if (ConvKerName) GenTilingDebug("%20s: %s\n", "ConvKerName", ConvKerName);
-		if (DPReductionKerName) GenTilingDebug("%20s: %s\n", "DPReductionKerName", DPReductionKerName);
-		if (PoolKerName) GenTilingDebug("%20s: %s\n", "PoolKerName", PoolKerName);
-		if (ActKerName) GenTilingDebug("%20s: %s\n", "ActKerName", ActKerName);
-		GenTilingDebug("Nb Oper : %lld\n", LayerOp);
+		printf("InFeat: %d, OutFeat: %d%s - TileOrientation: %s\n", InFeat, OutFeat, HWC?", HWC":", CHW", TileOrientation==TILE_HOR?"TILE_HOR":"TILE_VER");
+        	printf("Conv => W:  %d, Pad:[%d,%d] PadT:[%d,%d] => Wc: %d, Filter:[%d,%d]\n", Width,  PadInc[0], PadInc[1], PadIncT[0], PadIncT[1], Wc, Fcx, Fcy);
+        	printf("     => H:  %d, Pad:[%d,%d] PadT:[%d,%d] => Hc: %d\n", Height, PadInc[2], PadInc[3], PadIncT[2], PadIncT[3], Hc);
+        	printf("Pool => Wc: %d, Pad:[%d,%d] => Wo: %d, Filter:[%d,%d]\n", Wc, PadInp[0], PadInp[1], Wo, Fpx, Fpy);
+        	printf("     => Hc: %d, Pad:[%d,%d] => Ho: %d\n", Hc, PadInp[2], PadInp[3], Ho);
+        	printf("OverlapC: %d\n", OverlapC);
+        	printf("OverlapP: %d\n", OverlapP);
+        	printf("TileCons: %d\n", TileCons);
+		printf("UsedIn  : [%d x %d]\n", UsedWidth, UsedHeight);
+		printf("UsedC   : [%d x %d]\n", UsedWc, UsedHc);
+		if (MatPermKerName) printf("%20s: %s\n", "MatPermKerName", MatPermKerName);
+		if (ConvKerName) printf("%20s: %s\n", "ConvKerName", ConvKerName);
+		if (DPReductionKerName) printf("%20s: %s\n", "DPReductionKerName", DPReductionKerName);
+		if (PoolKerName) printf("%20s: %s\n", "PoolKerName", PoolKerName);
+		if (ActKerName) printf("%20s: %s\n", "ActKerName", ActKerName);
+		printf("Nb Oper : %lld\n", LayerOp);
 		
 	}
 	int OutTileCons = 8;
@@ -2196,7 +2115,7 @@ Kernel_T *CNN_ConvolutionPoolAct_SQ8_Internal(
 				      		       PoolOper, Fpx, Fpy, Dpx, Dpy, Spx, Spy, PoolPad, ActOper);
 		// AT_SetKernelCtrl(AT_KERNEL_NOSOLUTION_ERROR, AT_OPT_ON);
 		if (Ok!=0) return Ok;
-		if (Log) GenTilingDebug("No solution found for im2col scheme, reverting to standard implementation\n");
+		if (Log) printf("No solution found for im2col scheme, reverting to standard implementation\n");
 	}
 
 	if (PoolOper==KOP_NONE) {
@@ -2296,38 +2215,38 @@ Kernel_T *CNN_ConvolutionPoolAct_SQ8_Internal(
 	}
 
 	if (Log) {
-		GenTilingDebug("InFeat: %d, OutFeat: %d\n", InFeat, OutFeat);
-        	GenTilingDebug("Conv => W:  %d, Pad:[%d,%d] PadT:[%d,%d] => Wc: %d, Filter:[%d,%d]\n", Width,  PadInc[0], PadInc[1], PadIncT[0], PadIncT[1], Wc, Fcx, Fcy);
-        	GenTilingDebug("     => H:  %d, Pad:[%d,%d] PadT:[%d,%d] => Hc: %d\n", Height, PadInc[2], PadInc[3], PadIncT[2], PadIncT[3], Hc);
-        	GenTilingDebug("Pool => Wc: %d, Pad:[%d,%d] => Wo: %d, Filter:[%d,%d]\n", Wc, PadInp[0], PadInp[1], Wo, Fpx, Fpy);
-        	GenTilingDebug("     => Hc: %d, Pad:[%d,%d] => Ho: %d\n", Hc, PadInp[2], PadInp[3], Ho);
-        	GenTilingDebug("OverlapC: %d\n", OverlapC);
-        	GenTilingDebug("OverlapP: %d\n", OverlapP);
-        	GenTilingDebug("TileCons: %d\n", TileCons);
-		GenTilingDebug("UsedIn  : [%d x %d]\n", UsedWidth, UsedHeight);
-		GenTilingDebug("UsedC   : [%d x %d]\n", UsedWc, UsedHc);
-		if (SetBiasKerName) GenTilingDebug("%20s: %s\n", "SetBiasKerName", SetBiasKerName);
-		if (ConvKerName) GenTilingDebug("%20s: %s\n", "ConvKerName", ConvKerName);
-		if (DPReductionKerName) GenTilingDebug("%20s: %s\n", "DPReductionKerName", DPReductionKerName);
-		if (PoolKerName) GenTilingDebug("%20s: %s\n", "PoolKerName", PoolKerName);
-		if (ActKerName) GenTilingDebug("%20s: %s\n", "ActKerName", ActKerName);
-		GenTilingDebug("Nb Oper : %lld\n", LayerOp);
+		printf("InFeat: %d, OutFeat: %d\n", InFeat, OutFeat);
+        	printf("Conv => W:  %d, Pad:[%d,%d] PadT:[%d,%d] => Wc: %d, Filter:[%d,%d]\n", Width,  PadInc[0], PadInc[1], PadIncT[0], PadIncT[1], Wc, Fcx, Fcy);
+        	printf("     => H:  %d, Pad:[%d,%d] PadT:[%d,%d] => Hc: %d\n", Height, PadInc[2], PadInc[3], PadIncT[2], PadIncT[3], Hc);
+        	printf("Pool => Wc: %d, Pad:[%d,%d] => Wo: %d, Filter:[%d,%d]\n", Wc, PadInp[0], PadInp[1], Wo, Fpx, Fpy);
+        	printf("     => Hc: %d, Pad:[%d,%d] => Ho: %d\n", Hc, PadInp[2], PadInp[3], Ho);
+        	printf("OverlapC: %d\n", OverlapC);
+        	printf("OverlapP: %d\n", OverlapP);
+        	printf("TileCons: %d\n", TileCons);
+		printf("UsedIn  : [%d x %d]\n", UsedWidth, UsedHeight);
+		printf("UsedC   : [%d x %d]\n", UsedWc, UsedHc);
+		if (SetBiasKerName) printf("%20s: %s\n", "SetBiasKerName", SetBiasKerName);
+		if (ConvKerName) printf("%20s: %s\n", "ConvKerName", ConvKerName);
+		if (DPReductionKerName) printf("%20s: %s\n", "DPReductionKerName", DPReductionKerName);
+		if (PoolKerName) printf("%20s: %s\n", "PoolKerName", PoolKerName);
+		if (ActKerName) printf("%20s: %s\n", "ActKerName", ActKerName);
+		printf("Nb Oper : %lld\n", LayerOp);
 		
 	}
 	if (Ctrl && (Ctrl->EnableIm2Col==1) && (ConvOper==KOP_CONV) && (PoolOper==KOP_NONE) && (Fcx==1) && (Fcy==1) && (Dcx==1) && (Dcy==1)) {
 		AT_SetKernelCtrl(AT_KERNEL_NOSOLUTION_ERROR, AT_OPT_OFF);
 		// if ((InFeat+OutFeat)<80) {
 		if ((InFeat+OutFeat)<100 && (Scx==1) && (Scy==1)) {
-			if (Log) GenTilingDebug("Mapping this convolution to matrix multiplication with small first operand\n");
+			if (Log) printf("Mapping this convolution to matrix multiplication with small first operand\n");
 			Kernel_T *Ok = CNN_MatMulSmallM1Act_SQ8_Internal(Name, 0, Bias_DataSize, Scale_DataSize, InFeat, OutFeat, Width*Height, InFeat, Width, Height, Scx, Scy, KOP_MATMUL_SM1, ActOper);
-			if (!Ok&&Log) GenTilingDebug("Mapping this convolution to matrix multiplication with small first operand FAILED, trying with standard mult implementation\n");
+			if (!Ok&&Log) printf("Mapping this convolution to matrix multiplication with small first operand FAILED, trying with standard mult implementation\n");
 			if (Ok) return Ok;
 		}
-		if (Log) GenTilingDebug("Mapping this convolution to matrix multiplication\n");
+		if (Log) printf("Mapping this convolution to matrix multiplication\n");
 		Kernel_T *Ok = CNN_MatMulAct_SQ8_Internal(Name, 0, Bias_DataSize, Scale_DataSize, 1, InFeat, OutFeat, Width*Height, InFeat, Width, Height, Scx, Scy, KOP_MATMUL, ActOper, 1);
 		AT_SetKernelCtrl(AT_KERNEL_NOSOLUTION_ERROR, AT_OPT_ON);
 		if (Ok) return Ok;
-		if (Log) GenTilingDebug("Mapping this convolution to matrix multiplication FAILED, reverting to standard implementation\n");
+		if (Log) printf("Mapping this convolution to matrix multiplication FAILED, reverting to standard implementation\n");
 	}
 
 	/* User kernel C arguments */
@@ -2585,7 +2504,6 @@ int CNN_GroupedConvolutionPoolAct_SQ8(
 	if ((InFeat%GroupIn)||(OutFeat%GroupOut)||((InFeat/GroupIn)!=(OutFeat/GroupOut)))
 		GenTilingError("CNN_GroupedConvolutionPoolAct_SQ8: %s cannot divide In(%d)/Out(%d) feature spaces with these group parameters: GroupIn %d, GroupOut: %d",
 				Name, InFeat, OutFeat, GroupIn, GroupOut);
-	GenTilingDebug("Generating Grouped Convolution with %d NGroups, %d Groupin, %d GroupOut\n", NGroups, GroupIn, GroupOut);
 
 	OpenKernelGroup(Name);
 	CNN_ConvolutionPoolAct_SQ8(BodyName, Ctrl,
@@ -2624,13 +2542,6 @@ int CNN_GroupedConvolutionPoolAct_SQ8(
 		Calls(1,
 		      UserKernelCall(BodyName, LOC_GROUP,
 				Bindings(7,
-					// BindKGExpr("KArg(In, TileBase, D0) + Imm(GroupIn*Width*Height) * KArg(In, TileIndex)"),
-					// BindKGExpr("KArg(Filter, TileBase, D0) + Imm(GroupIn*GroupOut*Fcx*Fcy) * KArg(In, TileIndex)"),
-					// BindKGExpr("KArg(Bias, TileBase, D0) + Imm(GroupOut*Bias_DataSize) * KArg(In, TileIndex)"),
-					// BindKGExpr("KArg(Out, TileBase, D0) + Imm(GroupOut*Wo*Ho) * KArg(In, TileIndex)"),
-					// BindKGExpr("KArg(Scale, TileBase, D0) + Imm(GroupOut) * KArg(In, TileIndex)"),
-					// BindKGExpr("KArg(ScaleN, TileBase, D0) + Imm(GroupOut) * KArg(In, TileIndex)"),
-					// KG_ArgOper("Infos",  '+', 0)
 					KG_ArgOper("In",     '*', GroupIn*Width*Height),
 					KG_ArgOper("Filter", '*', GroupIn*GroupOut*Fcx*Fcy),
 					KG_ArgOper("Bias",   '*', GroupOut*Bias_DataSize),
@@ -2756,14 +2667,14 @@ Kernel_T * CNN_PoolAct_SQ8_Internal(
 	LayerBandwidth += (int64_t) Wo*Ho*1*Feat;
 
 	if (Log) {
-        	GenTilingDebug("Pool => W: %d, Pad:[%d,%d] => Wo: %d%s\n", Width,  PadInp[0], PadInp[1], Wo, HWC?", HWC":", CHW");
-        	GenTilingDebug("     => H: %d, Pad:[%d,%d] => Ho: %d\n", Height, PadInp[2], PadInp[3], Ho);
-        	GenTilingDebug("OverlapP: %d\n", OverlapP);
-        	GenTilingDebug("TileCons: %d\n", TileCons);
-		GenTilingDebug("UsedIn  : [%d x %d]\n", UsedWidth, UsedHeight);
-		if (PoolKerName) GenTilingDebug("%20s: %s\n", "PoolKerName", PoolKerName);
-		if (ActKerName) GenTilingDebug("%20s: %s\n", "ActKerName", ActKerName);
-		GenTilingDebug("Nb Oper : %lld\n", LayerOp);
+        	printf("Pool => W: %d, Pad:[%d,%d] => Wo: %d%s\n", Width,  PadInp[0], PadInp[1], Wo, HWC?", HWC":", CHW");
+        	printf("     => H: %d, Pad:[%d,%d] => Ho: %d\n", Height, PadInp[2], PadInp[3], Ho);
+        	printf("OverlapP: %d\n", OverlapP);
+        	printf("TileCons: %d\n", TileCons);
+		printf("UsedIn  : [%d x %d]\n", UsedWidth, UsedHeight);
+		if (PoolKerName) printf("%20s: %s\n", "PoolKerName", PoolKerName);
+		if (ActKerName) printf("%20s: %s\n", "ActKerName", ActKerName);
+		printf("Nb Oper : %lld\n", LayerOp);
 	}
 
 	CKernel_Arg_T **KCArgs = AllocateCArgs(3);
@@ -2914,10 +2825,10 @@ Kernel_T * CNN_Act_SQ8_Internal(
 	LayerBandwidth += (int64_t) Width*Height*1*Feat;
 
 	if (Log) {
-        	GenTilingDebug("Act  => W: %d, Wo: %d\n", Width,  Width);
-        	GenTilingDebug("     => H: %d, Ho: %d\n", Height, Height);
-		GenTilingDebug("%20s: %s\n", "ActKerName", ActKerName);
-		GenTilingDebug("Nb Oper : %lld\n", LayerOp);
+        	printf("Act  => W: %d, Wo: %d\n", Width,  Width);
+        	printf("     => H: %d, Ho: %d\n", Height, Height);
+		printf("%20s: %s\n", "ActKerName", ActKerName);
+		printf("Nb Oper : %lld\n", LayerOp);
 	}
 
         Kernel_T *Kernel = UserKernel(Name,
@@ -3034,12 +2945,12 @@ static Kernel_T *CNN_GlobalPoolAct_SQ8_Interal(
 	LayerBandwidth += (int64_t) Wo*Ho*1*Feat;
 
 	if (Log) {
-        	GenTilingDebug("Global Pool => W: %d => Wo: %d\n", Width,  Wo);
-        	GenTilingDebug("            => H: %d => Ho: %d\n", Height, Ho);
-        	GenTilingDebug("            => Feat: %d\n", Feat);
-		if (PoolKerName)      GenTilingDebug("%20s: %s\n", "PoolKerName", PoolKerName);
-		if (ActKerName)       GenTilingDebug("%20s: %s\n", "ActKerName", ActKerName);
-		GenTilingDebug("Nb Oper : %lld\n", LayerOp);
+        	printf("Global Pool => W: %d => Wo: %d\n", Width,  Wo);
+        	printf("            => H: %d => Ho: %d\n", Height, Ho);
+        	printf("            => Feat: %d\n", Feat);
+		if (PoolKerName)      printf("%20s: %s\n", "PoolKerName", PoolKerName);
+		if (ActKerName)       printf("%20s: %s\n", "ActKerName", ActKerName);
+		printf("Nb Oper : %lld\n", LayerOp);
 	}
 
         Kernel_T *Kernel;
@@ -3103,13 +3014,13 @@ static Kernel_T *CNN_GlobalPoolAct_SQ8_Interal(
 			if (ActKerName==0) GenTilingError("CNN_GlobalPoolAct_SQ8 Kernel: %s, Can't find a matching activation basic kernel", Name);
 		}
 		if (Log) {
-        		GenTilingDebug("Global Pool DP => W: %d => Wo: %d\n", Width,  Wo);
-        		GenTilingDebug("               => H: %d => Ho: %d\n", Height, Ho);
-        		GenTilingDebug("               => Feat: %d\n", Feat);
-			if (PoolKerName)       GenTilingDebug("%20s: %s\n", "PoolKerName", PoolKerName);
-			if (PoolReductKerName) GenTilingDebug("%20s: %s\n", "PoolReductKerName", PoolReductKerName);
-			if (ActKerName)        GenTilingDebug("%20s: %s\n", "ActKerName", ActKerName);
-			GenTilingDebug("Nb Oper : %lld\n", LayerOp);
+        		printf("Global Pool DP => W: %d => Wo: %d\n", Width,  Wo);
+        		printf("               => H: %d => Ho: %d\n", Height, Ho);
+        		printf("               => Feat: %d\n", Feat);
+			if (PoolKerName)       printf("%20s: %s\n", "PoolKerName", PoolKerName);
+			if (PoolReductKerName) printf("%20s: %s\n", "PoolReductKerName", PoolReductKerName);
+			if (ActKerName)        printf("%20s: %s\n", "ActKerName", ActKerName);
+			printf("Nb Oper : %lld\n", LayerOp);
 		}
        		Kernel = UserKernel(Name,
 			KernelIterSpace(2, IterParSpace(D0, Feat, 8), IterTiledSpace(T0)),
@@ -3250,9 +3161,9 @@ Kernel_T * CNN_LinearAct_SQ8_Internal(
 	LayerBandwidth += (int64_t) Bias_DataSize*OutDim;
 
 	if (Log) {
-		GenTilingDebug("Linear Layer %s, %s: InDim: %d, OutDim: %d, Activation: %s\n", Name, CNN_KernelOperImage(LinearOper), InDim, OutDim, CNN_KernelOperImage(ActOper));
-		if (LinearKerName) GenTilingDebug("Linear Kernel: %s\n", LinearKerName);
-		if (ActKerName)    GenTilingDebug("Act Kernel: %s\n", ActKerName);
+		printf("Linear Layer %s, %s: InDim: %d, OutDim: %d, Activation: %s\n", Name, CNN_KernelOperImage(LinearOper), InDim, OutDim, CNN_KernelOperImage(ActOper));
+		if (LinearKerName) printf("Linear Kernel: %s\n", LinearKerName);
+		if (ActKerName)    printf("Act Kernel: %s\n", ActKerName);
 	}
 	Kernel_T *Kernel;
 
@@ -3325,11 +3236,11 @@ Kernel_T * CNN_LinearAct_SQ8_Internal(
 		if (ReductKerName==0) GenTilingError("CNN_LinearAct_SQ8 Kernel: %s, Can't find a matching Reduction basic kernel", Name);
 	
 		if (Log) {
-			GenTilingDebug("Linear Layer %s, %s: InDim: %d, OutDim: %d, Activation: %s, output parallel failed, switching to feature parallel form\n",
+			printf("Linear Layer %s, %s: InDim: %d, OutDim: %d, Activation: %s, output parallel failed, switching to feature parallel form\n",
 				Name, CNN_KernelOperImage(LinearOper), InDim, OutDim, CNN_KernelOperImage(ActOper));
-			if (SetBiasKerName) GenTilingDebug("SetBias Kernel: %s\n", SetBiasKerName);
-			if (LinearKerName)  GenTilingDebug("Linear Kernel   : %s\n", LinearKerName);
-			if (ReductKerName)  GenTilingDebug("Reduction Kernel: %s\n", ReductKerName);
+			if (SetBiasKerName) printf("SetBias Kernel: %s\n", SetBiasKerName);
+			if (LinearKerName)  printf("Linear Kernel   : %s\n", LinearKerName);
+			if (ReductKerName)  printf("Reduction Kernel: %s\n", ReductKerName);
 		}
 
 		Object_T **KArgs = AllocateKerArgs(8);
@@ -4107,13 +4018,13 @@ Kernel_T *CNN_MatMulAct_SQ8_Internal(
 	if (Scy!=1) ConsT0 = Width*Scy; else ConsT0 = 4;
 	
 	if (Log) {
-		GenTilingDebug("CNN_MatMul_SQ8: %s\n", Name);
-		GenTilingDebug("In1  => W: %4d, H: %4d %s\n", ColM1, LineM1, Transposed?"(TRANSPOSED)":"");
-		GenTilingDebug("In2  => W: %4d, H: %4d, w: %4d, h: %4d, Sx: %1d, Sy: %1d\n", ColM2, LineM2, Width, Height, Scx, Scy);
-		GenTilingDebug("Out  => W: %4d, H: %4d => %s\n", ColO, LineO, ColFirst?"Column first":"Line First");
-		if (MatMulKerName) GenTilingDebug("%20s: %s\n", "MatMulKerName", MatMulKerName);
-		if (ActKerName)    GenTilingDebug("%20s: %s\n", "ActKerName", ActKerName);
-		// GenTilingDebug("Nb Oper : %lld\n", LayerOp);
+		printf("CNN_MatMul_SQ8: %s\n", Name);
+		printf("In1  => W: %4d, H: %4d %s\n", ColM1, LineM1, Transposed?"(TRANSPOSED)":"");
+		printf("In2  => W: %4d, H: %4d, w: %4d, h: %4d, Sx: %1d, Sy: %1d\n", ColM2, LineM2, Width, Height, Scx, Scy);
+		printf("Out  => W: %4d, H: %4d => %s\n", ColO, LineO, ColFirst?"Column first":"Line First");
+		if (MatMulKerName) printf("%20s: %s\n", "MatMulKerName", MatMulKerName);
+		if (ActKerName)    printf("%20s: %s\n", "ActKerName", ActKerName);
+		// printf("Nb Oper : %lld\n", LayerOp);
 	}
 
 	Kernel_T *Kernel;
@@ -4312,15 +4223,15 @@ Kernel_T * CNN_MatMulSmallM1Act_SQ8_Internal(
 	LayerBandwidth += (int64_t) LineM1*Bias_DataSize;
 
 	if (Log) {
-		GenTilingDebug("CNN_MatMulSmallM1_SQ8: %s\n", Name);
-		GenTilingDebug("In1  => W: %4d, H: %4d\n", ColM1, LineM1);
-		GenTilingDebug("In2  => W: %4d, H: %4d, w: %4d, h: %4d, Sx: %1d, Sy: %1d, TileCons: %d\n", ColM2, LineM2, Width, Height, Scx, Scy, TileCons);
-		GenTilingDebug("Out  => W: %4d, H: %4d\n", ColO, LineO);
-		if (MatMulKerName) GenTilingDebug("%20s: %s\n", "MatMulKerName", MatMulKerName);
-		if (MatTransKerName) GenTilingDebug("%20s: %s\n", "MatTransKerName", MatTransKerName);
-		if (ActKerName) GenTilingDebug("%20s: %s\n", "ActKerName", ActKerName);
-		GenTilingDebug("Act: %s\n", CNN_KernelOperImage(ActOper));
-		GenTilingDebug("Nb Oper : %lld\n", LayerOp);
+		printf("CNN_MatMulSmallM1_SQ8: %s\n", Name);
+		printf("In1  => W: %4d, H: %4d\n", ColM1, LineM1);
+		printf("In2  => W: %4d, H: %4d, w: %4d, h: %4d, Sx: %1d, Sy: %1d, TileCons: %d\n", ColM2, LineM2, Width, Height, Scx, Scy, TileCons);
+		printf("Out  => W: %4d, H: %4d\n", ColO, LineO);
+		if (MatMulKerName) printf("%20s: %s\n", "MatMulKerName", MatMulKerName);
+		if (MatTransKerName) printf("%20s: %s\n", "MatTransKerName", MatTransKerName);
+		if (ActKerName) printf("%20s: %s\n", "ActKerName", ActKerName);
+		printf("Act: %s\n", CNN_KernelOperImage(ActOper));
+		printf("Nb Oper : %lld\n", LayerOp);
 	}
 
 	Kernel_T *Kernel = UserKernel(Name,
@@ -4453,7 +4364,7 @@ int CNN_MM_ConvolutionPoolAct_SQ8(
         Tile_Orientation_T TileOrientation = TILE_HOR;
         if (Ctrl) {
 		if (Ctrl->TileOrientation != -1) {
-			GenTilingDebug("TileOrientation set by user\n");
+			printf("TileOrientation set by user\n");
 			Ker = CNN_MM_ConvolutionPoolAct_SQ8_Internal(Name, Ctrl, Bias_DataSize, Scale_DataSize, InFeat, OutFeat, Width, Height, ConvOper, Fcx, Fcy, Dcx, Dcy, Scx, Scy, ConvPad, PoolOper, Fpx, Fpy, Dpx, Dpy, Spx, Spy, PoolPad, ActOper);
 			if (Ker!=0) return 1;
 			else GenTilingError("CNN_MM_ConvolutionPoolAct_SQ8: %s, Failed to gen with set tiling orientation, try to let the Autotiler set it for you", Name);
@@ -4466,19 +4377,19 @@ int CNN_MM_ConvolutionPoolAct_SQ8(
 	if (!Ctrl) CNN_InitGenCtrl(&InternalCtrl);
     	else 	   InternalCtrl = *Ctrl;
 
-	GenTilingDebug("\n\n=============================== Trying Tile Orientation: TILE_HOR ===============================\n\n");
+	printf("\n\n=============================== Trying Tile Orientation: TILE_HOR ===============================\n\n");
     	CNN_SetGenCtrl(&InternalCtrl, "TILEORIENTATION", AT_OPT_VAL(0));
         Ker = CNN_MM_ConvolutionPoolAct_SQ8_Internal(Name, &InternalCtrl, Bias_DataSize, Scale_DataSize, InFeat, OutFeat, Width, Height, ConvOper, Fcx, Fcy, Dcx, Dcy, Scx, Scy, ConvPad, PoolOper, Fpx, Fpy, Dpx, Dpy, Spx, Spy, PoolPad, ActOper);
         if (Ker) Sol1 = CopyAndPopUserKernel(Ker);
 
-	GenTilingDebug("\n=============================== Trying Tile Orientation: TILE_VER ===============================\n\n");
+	printf("\n=============================== Trying Tile Orientation: TILE_VER ===============================\n\n");
     	CNN_SetGenCtrl(&InternalCtrl, "TILEORIENTATION", AT_OPT_VAL(1));
         Ker = CNN_MM_ConvolutionPoolAct_SQ8_Internal(Name, &InternalCtrl, Bias_DataSize, Scale_DataSize, InFeat, OutFeat, Width, Height, ConvOper, Fcx, Fcy, Dcx, Dcy, Scx, Scy, ConvPad, PoolOper, Fpx, Fpy, Dpx, Dpy, Spx, Spy, PoolPad, ActOper);
         if (Ker) Sol2 = CopyAndPopUserKernel(Ker);
 
         if (Sol1 && Sol2) {
 		int TakeSol1 = ((K*Sol1->Cost->TileOverhead) < Sol2->Cost->TileOverhead);  // K close to 1.0if (TakeSol1) {
-		GenTilingDebug(">>>>>>>>>>>>>>>>>> %s is better: %.3f vs %.3f \n\n\n", TakeSol1?"TILE_HOR":"TILE_VER", Sol1->Cost->TileOverhead, Sol2->Cost->TileOverhead);
+		printf(">>>>>>>>>>>>>>>>>> %s is better: %.3f vs %.3f \n\n\n", TakeSol1?"TILE_HOR":"TILE_VER", Sol1->Cost->TileOverhead, Sol2->Cost->TileOverhead);
 		if (TakeSol1) {
                     PushBackUserKernel(Sol1); ReleaseUserKerne(Sol2);
                 } else {
@@ -4534,7 +4445,7 @@ int CNN_HWC_DWConvolutionPoolAct_SQ8(
         Tile_Orientation_T TileOrientation = TILE_HOR;
         if (Ctrl) {
 		if (Ctrl->TileOrientation != -1) {
-			GenTilingDebug("TileOrientation set by user\n");
+			printf("TileOrientation set by user\n");
 			Ker = CNN_HWC_DWConvolutionPoolAct_SQ8_Internal(Name, Ctrl, Bias_DataSize, Scale_DataSize, InFeat, OutFeat, Width, Height, ConvOper, Fcx, Fcy, Dcx, Dcy, Scx, Scy, ConvPad, PoolOper, Fpx, Fpy, Dpx, Dpy, Spx, Spy, PoolPad, ActOper);
 			if (Ker!=0) return 1;
 			else GenTilingError("CNN_MM_ConvolutionPoolAct_SQ8: %s, Failed to gen with set tiling orientation, try to let the Autotiler set it for you", Name);
@@ -4547,19 +4458,19 @@ int CNN_HWC_DWConvolutionPoolAct_SQ8(
 	if (!Ctrl) CNN_InitGenCtrl(&InternalCtrl);
     	else 	   InternalCtrl = *Ctrl;
 
-	GenTilingDebug("\n\n=============================== Trying Tile Orientation: TILE_HOR ===============================\n\n");
+	printf("\n\n=============================== Trying Tile Orientation: TILE_HOR ===============================\n\n");
     	CNN_SetGenCtrl(&InternalCtrl, "TILEORIENTATION", AT_OPT_VAL(0));
         Ker = CNN_HWC_DWConvolutionPoolAct_SQ8_Internal(Name, &InternalCtrl, Bias_DataSize, Scale_DataSize, InFeat, OutFeat, Width, Height, ConvOper, Fcx, Fcy, Dcx, Dcy, Scx, Scy, ConvPad, PoolOper, Fpx, Fpy, Dpx, Dpy, Spx, Spy, PoolPad, ActOper);
         if (Ker) Sol1 = CopyAndPopUserKernel(Ker);
 
-	GenTilingDebug("\n=============================== Trying Tile Orientation: TILE_VER ===============================\n\n");
+	printf("\n=============================== Trying Tile Orientation: TILE_VER ===============================\n\n");
     	CNN_SetGenCtrl(&InternalCtrl, "TILEORIENTATION", AT_OPT_VAL(1));
         Ker = CNN_HWC_DWConvolutionPoolAct_SQ8_Internal(Name, &InternalCtrl, Bias_DataSize, Scale_DataSize, InFeat, OutFeat, Width, Height, ConvOper, Fcx, Fcy, Dcx, Dcy, Scx, Scy, ConvPad, PoolOper, Fpx, Fpy, Dpx, Dpy, Spx, Spy, PoolPad, ActOper);
         if (Ker) Sol2 = CopyAndPopUserKernel(Ker);
 
         if (Sol1 && Sol2) {
 		int TakeSol1 = ((K*Sol1->Cost->TileOverhead) < Sol2->Cost->TileOverhead);  // K close to 1.0if (TakeSol1) {
-		GenTilingDebug(">>>>>>>>>>>>>>>>>> %s is better: %.3f vs %.3f \n\n\n", TakeSol1?"TILE_HOR":"TILE_VER", Sol1->Cost->TileOverhead, Sol2->Cost->TileOverhead);
+		printf(">>>>>>>>>>>>>>>>>> %s is better: %.3f vs %.3f \n\n\n", TakeSol1?"TILE_HOR":"TILE_VER", Sol1->Cost->TileOverhead, Sol2->Cost->TileOverhead);
 		if (TakeSol1) {
                     PushBackUserKernel(Sol1); ReleaseUserKerne(Sol2);
                 } else {
@@ -4611,7 +4522,7 @@ int CNN_ConvolutionPoolAct_SQ8(
 	)
 {
 	if (Fcx==1 && Fcy==1 && Height==1 && Width==1) {
-		GenTilingDebug("This is a pointwise on 1x1 input --> Mapping to CNN_Linear_NE16\n");
+		printf("This is a pointwise on 1x1 input --> Mapping to CNN_Linear_NE16\n");
 		return CNN_LinearAct_SQ8(Name, Ctrl, Bias_DataSize, Scale_DataSize, InFeat, OutFeat, KOP_LINEAR, ActOper);
 	}
 	Kernel_T *Ker = 0, *Sol1 = 0, *Sol2 = 0;
@@ -4619,7 +4530,7 @@ int CNN_ConvolutionPoolAct_SQ8(
         Tile_Orientation_T TileOrientation = TILE_HOR;
         if (Ctrl) {
 		if (Ctrl->TileOrientation != -1) {
-			GenTilingDebug("TileOrientation set by user\n");
+			printf("TileOrientation set by user\n");
 			Ker = CNN_ConvolutionPoolAct_SQ8_Internal(Name, Ctrl, Bias_DataSize, Scale_DataSize, InFeat, OutFeat, Width, Height, ConvOper, Fcx, Fcy, Dcx, Dcy, Scx, Scy, ConvPad, PoolOper, Fpx, Fpy, Dpx, Dpy, Spx, Spy, PoolPad, ActOper);
 			if (Ker!=0) return 1;
 			else GenTilingError("CNN_ConvolutionPoolAct_SQ8: %s, Failed to gen with set tiling orientation, try to let the Autotiler set it for you", Name);
@@ -4631,19 +4542,19 @@ int CNN_ConvolutionPoolAct_SQ8(
 	if (!Ctrl) CNN_InitGenCtrl(&InternalCtrl);
     	else 	   InternalCtrl = *Ctrl;
 
-	GenTilingDebug("\n\n=============================== Trying Tile Orientation: TILE_HOR ===============================\n\n");
+	printf("\n\n=============================== Trying Tile Orientation: TILE_HOR ===============================\n\n");
     	CNN_SetGenCtrl(&InternalCtrl, "TILEORIENTATION", AT_OPT_VAL(0));
         Ker = CNN_ConvolutionPoolAct_SQ8_Internal(Name, &InternalCtrl, Bias_DataSize, Scale_DataSize, InFeat, OutFeat, Width, Height, ConvOper, Fcx, Fcy, Dcx, Dcy, Scx, Scy, ConvPad, PoolOper, Fpx, Fpy, Dpx, Dpy, Spx, Spy, PoolPad, ActOper);
         if (Ker) Sol1 = CopyAndPopUserKernel(Ker);
 
-	GenTilingDebug("\n=============================== Trying Tile Orientation: TILE_VER ===============================\n\n");
+	printf("\n=============================== Trying Tile Orientation: TILE_VER ===============================\n\n");
     	CNN_SetGenCtrl(&InternalCtrl, "TILEORIENTATION", AT_OPT_VAL(1));
         Ker = CNN_ConvolutionPoolAct_SQ8_Internal(Name, &InternalCtrl, Bias_DataSize, Scale_DataSize, InFeat, OutFeat, Width, Height, ConvOper, Fcx, Fcy, Dcx, Dcy, Scx, Scy, ConvPad, PoolOper, Fpx, Fpy, Dpx, Dpy, Spx, Spy, PoolPad, ActOper);
         if (Ker) Sol2 = CopyAndPopUserKernel(Ker);
 
         if (Sol1 && Sol2) {
 		int TakeSol1 = ((K*Sol1->Cost->TileOverhead) < Sol2->Cost->TileOverhead);  // K close to 1.0if (TakeSol1) {
-		GenTilingDebug(">>>>>>>>>>>>>>>>>> %s is better: %.3f vs %.3f \n\n\n", TakeSol1?"TILE_HOR":"TILE_VER", Sol1->Cost->TileOverhead, Sol2->Cost->TileOverhead);
+		printf(">>>>>>>>>>>>>>>>>> %s is better: %.3f vs %.3f \n\n\n", TakeSol1?"TILE_HOR":"TILE_VER", Sol1->Cost->TileOverhead, Sol2->Cost->TileOverhead);
 		if (TakeSol1) {
                     PushBackUserKernel(Sol1); ReleaseUserKerne(Sol2);
                 } else {

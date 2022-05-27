@@ -163,7 +163,7 @@ static void __uart_printf_flush(char c)
 #include "semihost.h"
 
 static uint8_t g_printf_semihost_index = 0;
-static char g_printf_semihost_buffer[PRINTF_BUFFER_SIZE+1];
+static char g_printf_semihost_buffer[PRINTF_BUFFER_SIZE];
 
 struct semihost_putc_req_s
 {
@@ -212,19 +212,18 @@ static void __semihost_putc(char c)
     else
     #endif  /* FEATURE_CLUSTER */
     {
-        __io_lock();
         g_printf_semihost_buffer[g_printf_semihost_index] = c;
         g_printf_semihost_index++;
         if ((g_printf_semihost_index == ((uint32_t) PRINTF_BUFFER_SIZE - 1)) ||
             (c == '\n'))
         {
-        g_printf_semihost_buffer[g_printf_semihost_index] = '\0';
+            __io_lock();
             __semihost_buffer_write_exec(g_printf_semihost_buffer,
                                          g_printf_semihost_index);
+            __io_unlock();
             g_printf_semihost_index = 0;
-        g_printf_semihost_buffer[0] = '\0';
+            memset(g_printf_semihost_buffer, 0, (uint32_t) PRINTF_BUFFER_SIZE);
         }
-        __io_unlock();
     }
 }
 
@@ -308,7 +307,7 @@ __attribute__((noinline)) void __io_lock()
             if (!__is_irq_mode())
             {
                 BaseType_t ret = 0;
-                xSemaphoreTake(g_printf_mutex, portMAX_DELAY);
+                xSemaphoreTakeFromISR(g_printf_mutex, &ret);
             }
         }
     }

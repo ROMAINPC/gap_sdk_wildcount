@@ -89,15 +89,6 @@ sub load_test_base {
         croak "No platform listed in the test base";
     }
 
-    if(defined $file_content->[0]->{boards})
-    {
-        $test_base{boards} = [ @{$file_content->[0]->{boards}} ];
-    }
-    else
-    {
-        $test_base{boards} = undef;
-    }
-
     return %test_base;
 }
 
@@ -205,15 +196,6 @@ sub load_test_variant {
     else
     {
         $test_variant{platforms} = [ @{$test_base{platforms}} ];
-    }
-
-    if(defined($section->{boards}))
-    {
-        $test_variant{boards} = [ @{$section->{boards}} ];
-    }
-    elsif(defined($test_base{boards}))
-    {
-        $test_variant{boards} = [ @{$test_base{boards}} ];
     }
 
     if(defined($section->{timeout}))

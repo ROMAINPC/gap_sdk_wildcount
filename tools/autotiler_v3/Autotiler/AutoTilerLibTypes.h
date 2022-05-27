@@ -111,7 +111,6 @@ typedef enum {
 	KOP_EXPAND,
 	KOP_COLLAPSE,
 	KOP_COPY,
-	KOP_CONCAT,
 
 	KOP_RNN,
 	KOP_LSTM,

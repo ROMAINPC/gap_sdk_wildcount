@@ -197,7 +197,6 @@ public:
     vp::io_master out;
     vp::reg_32 state;
     vp::reg_8 activity;
-    vp::reg_1 busy;
     Ne16TraceLevel trace_level;
     int trace_format;
 

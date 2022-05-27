@@ -3,6 +3,15 @@
 User and Developer Guides
 =========================
 
+TODO
+
+- Using the Flasher
+- Using GVSOC
+- Boot Modes
+- Flash and run on boards
+- Create your board configs
+- Etc.
+
 .. toctree::
    :maxdepth: 1
 
@@ -11,14 +20,3 @@ User and Developer Guides
    application_makefile_options.rst
    vscode_integration.rst
 
-.. TODO
-   - Beyond the Getting Started Guide
-   - Using GVSOC
-   - Using the Flasher
-   - Boot Modes
-   - Flash and run on boards (openOCD, udev rules, etc)
-   - Create your board configs
-   - Add a devide driver
-   - Debugging
-   - Optimizations
-   - Etc.

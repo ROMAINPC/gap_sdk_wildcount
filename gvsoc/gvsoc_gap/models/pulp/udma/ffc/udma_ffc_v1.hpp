@@ -284,7 +284,6 @@ class Ffc_periph : public Udma_periph
 
         /** Busy signal for VCD tracing */
         vp::reg_8 busy;
-        vp::reg_1 busy_1;
 };
 
 

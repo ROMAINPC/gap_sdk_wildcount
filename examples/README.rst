@@ -1,10 +1,11 @@
-.. _sdk_examples:
+.. _examples:
 
 Examples
 ========
+
+TODO
 
 .. toctree::
    :maxdepth: 1
 
    pmsis/README.rst
-   libs/README.rst

@@ -3,10 +3,6 @@
 VSCode Integration
 ==================
 
-.. warning::
-
-    VSCode support is experimental. Use at your own risk.
-
 SDK examples can be compiled and run on boards from VSCode.
 
 Setup
