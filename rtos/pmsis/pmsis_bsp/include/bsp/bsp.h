@@ -154,6 +154,12 @@ void bsp_spiflash_conf_init(struct pi_spiflash_conf *conf);
 int bsp_spiflash_open(struct pi_spiflash_conf *conf);
 #endif
 
+#if defined(CONFIG_SDFLASH)
+#include "bsp/flash/sdflash.h"
+void bsp_sdflash_conf_init(struct pi_sdflash_conf *conf);
+int bsp_sdflash_open(struct pi_sdflash_conf *conf);
+#endif
+
 #if defined(CONFIG_HYPERRAM)
 #include "bsp/ram/hyperram.h"
 void bsp_hyperram_conf_init(struct pi_hyperram_conf *conf);

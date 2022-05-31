@@ -24,6 +24,7 @@
 #define CONFIG_NINA_B112
 #define CONFIG_SPIRAM
 #define CONFIG_SPIFLASH
+#define CONFIG_SDFLASH
 
 #define CONFIG_MT9V034_CPI_ITF               0
 #define CONFIG_MT9V034_I2C_ITF               1
@@ -65,6 +66,9 @@
 #define CONFIG_SPIFLASH_START       0
 #define CONFIG_SPIFLASH_SIZE        (8<<20)
 #define CONFIG_SPIFLASH_SECTOR_SIZE (1<<12)
+
+#define CONFIG_SDFLASH_SPI_ITF 1
+#define CONFIG_SDFLASH_SPI_CS 0
 
 #define CONFIG_HYPERBUS_DATA6_PAD           PI_PAD_46_B7_SPIM0_SCK
 // This is due to a HW bug, to be fixed in the future

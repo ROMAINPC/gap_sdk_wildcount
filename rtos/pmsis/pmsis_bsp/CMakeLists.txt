@@ -7,6 +7,7 @@ set(BSP_FLASH_SRC
     )
 set(BSP_HYPERFLASH_SRC flash/hyperflash/hyperflash.c)
 set(BSP_SPIFLASH_SRC flash/spiflash/spiflash.c)
+set(BSP_SDFLASH_SRC flash/spiflash/spiflash.c)
 set(BSP_HYPERRAM_SRC ram/hyperram/hyperram.c)
 set(BSP_SPIRAM_SRC ram/spiram/spiram.c)
 set(BSP_RAM_SRC ram/ram.c ram/alloc_extern.c)
@@ -108,6 +109,7 @@ set(GAPOC_A_SRC =
   display/ili9341/ili9341.c  
   ${BSP_SPIRAM_SRC}  
   ${BSP_SPIFLASH_SRC}  
+  ${BSP_SDFLASH_SRC} 
   ${BSP_HYPERRAM_SRC}  
   ${BSP_RAM_SRC}  
   ${BSP_BLE_NINA_B112_SRC}

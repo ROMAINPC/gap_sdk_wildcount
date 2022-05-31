@@ -14,22 +14,22 @@
  * limitations under the License.
  */
 
-#include "pmsis.h"
-
-#include "bsp/bsp.h"
-#include "pmsis/drivers/gpio.h"
-#include "pmsis/drivers/pad.h"
 #include "bsp/gapoc_a.h"
-#include "bsp/camera/mt9v034.h"
-#include "bsp/flash/hyperflash.h"
-#include "bsp/flash/spiflash.h"
-#include "bsp/transport/nina_w10.h"
-#include "bsp/display/ili9341.h"
-#include "bsp/ram/hyperram.h"
-#include "bsp/ram/spiram.h"
+
 #include "bsp/ble/nina_b112.h"
 #include "bsp/ble/nina_b112/nina_b112_old.h"
-
+#include "bsp/bsp.h"
+#include "bsp/camera/mt9v034.h"
+#include "bsp/display/ili9341.h"
+#include "bsp/flash/hyperflash.h"
+#include "bsp/flash/sdflash.h"
+#include "bsp/flash/spiflash.h"
+#include "bsp/ram/hyperram.h"
+#include "bsp/ram/spiram.h"
+#include "bsp/transport/nina_w10.h"
+#include "pmsis.h"
+#include "pmsis/drivers/gpio.h"
+#include "pmsis/drivers/pad.h"
 
 static int __bsp_init_pads_done = 0;
 
@@ -123,6 +123,11 @@ void bsp_spiflash_conf_init(struct pi_spiflash_conf *conf)
     conf->sector_size = CONFIG_SPIFLASH_SECTOR_SIZE;
     conf->spi_itf = CONFIG_SPIFLASH_SPI_ITF;
     conf->spi_cs = CONFIG_SPIFLASH_SPI_CS;
+}
+
+void bsp_sdflash_conf_init(struct pi_sdflash_conf *conf) {
+    conf->spi_itf = CONFIG_SDFLASH_SPI_ITF;
+    conf->spi_cs = CONFIG_SDFLASH_SPI_CS;
 }
 
 int bsp_spiflash_open(struct pi_spiflash_conf *conf)
